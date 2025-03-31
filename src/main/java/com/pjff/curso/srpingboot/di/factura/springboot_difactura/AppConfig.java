@@ -10,29 +10,33 @@ import org.springframework.context.annotation.PropertySource;
 import com.pjff.curso.srpingboot.di.factura.springboot_difactura.models.Item;
 import com.pjff.curso.srpingboot.di.factura.springboot_difactura.models.Product;
 
-/*Vid 68,paso 10 , anotamos una nueva clase configuration para poder usar el data.properties
+/*V-68,paso 10 , anotamos una nueva clase configuration para poder usar el data.properties
  que creamos*/
 @Configuration
-// paso 11
-// Vid 70,Paso 20, para los acentos, value = "classpath:data.properties",
-// encoding = "UTF-8"
+/*
+ * Paso 11,ponemos el @PropertySource
+ * V-70,Paso 24, para los acentos, value = "classpath:data.properties",
+ * encoding = "UTF-8"
+ */
 @PropertySource(value = "classpath:data.properties", encoding = "UTF-8")
 public class AppConfig {
 
-    // @Primary
-    // este es un bean, ya es un componente
-    // paso 24, ponemos el bean por defecto porqie tenemos 2
+    /*
+     * @Primary
+     * Este es un bean, ya es un componente
+     * Paso, ponemos el bean por defecto porque tenemos 2
+     */
     @Bean
-    // Vid 68,Paso 15 le llamamos itemsInvoice:
+    // V-69,Paso 15 le llamamos itemsInvoice:
     List<Item> itemsInvoice() {
         // Paso 16, creamos los productos
         Product p1 = new Product("Pokedex", 800);
         Product p2 = new Product("Bicicleta", 1200);
-        // devuelve una lista de items,pasamos el producto y la cantidad
+        // Paso 18,devuelve una lista de items,pasamos el producto y la cantidad
         return Arrays.asList(new Item(p1, 2), new Item(p2, 4));
     }
 
-    // Vid 72, paso 23
+    // V-72, paso
     @Bean("default")
     List<Item> itemsInvoiceOffice() {
         Product p1 = new Product("Monitor Asus 24", 700);

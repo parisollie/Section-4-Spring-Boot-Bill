@@ -8,21 +8,19 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.annotation.RequestScope;
 
-//import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
 import jakarta.annotation.PostConstruct;
 import jakarta.annotation.PreDestroy;
 
 //Le ponemos component porque será componente ,paso 9 Vid 67
 @Component
-// Vid 75, agregamos @RequestScope
+// V-75, agregamos @RequestScope
 @RequestScope
-// Vid 75, ignoramos el json, omitimos 2 atributos del proxy: { "targetSource",
+// V-75, ignoramos el json, omitimos 2 atributos del proxy: { "targetSource",
 // "advisors" }
 // @JsonIgnoreProperties({ "targetSource", "advisors" })
 public class Invoice {
-    // Paso 3, creamos las propiedades de factura client , description y lista
-    // Paso 8, con Autowired, inyectamos el cliente
+    // Paso 3 , creamos las propiedades de factura client , description y lista.
+    // Con Autowired, inyectamos el cliente
     @Autowired
     private Client client;
 
@@ -32,7 +30,7 @@ public class Invoice {
 
     // Paso 19, vid 69, inyectamos con el Autowired
     @Autowired
-    // Vid 72, ponemos el @Qualifier("default")
+    // V-72, ponemos el @Qualifier("default")
     @Qualifier("default")
     private List<Item> items;
 
@@ -46,7 +44,7 @@ public class Invoice {
     // @PostConstruct, se ejecuta despues de que se haya instanciado y depsues de
     // que se haya inyectado
     @PostConstruct
-    // Vid 73,paso 25
+    // V-73,paso
     public void init() {
         System.out.println("Creando el componente de la factura");
         client.setName(client.getName().concat(" Nick"));
@@ -55,7 +53,7 @@ public class Invoice {
                 .concat(client.getLastname());
     }
 
-    // Vid 74,paso 26, se cierra una conexion o algo así para que no se quede
+    // V-74,paso , se cierra una conexion o algo así para que no se quede
     // abierta
     @PreDestroy
     public void destroy() {
@@ -89,7 +87,7 @@ public class Invoice {
     }
 
     /*---------------------------------------------------------------------*/
-    // Vid 70,paso 22
+    // V-70,paso 26
     public int getTotal() {
 
         /*
@@ -102,14 +100,17 @@ public class Invoice {
          */
 
         return items.stream()
-                // Vid 71, Paso 23, usamos el map,ponemos el item para que nos devuelva el valor
-                // y poder
-                // en numero enteros
+                /*
+                 * V-71, Paso 27 , usamos el map,ponemos el item para que nos devuelva el valor
+                 * y poner en numero enteros
+                 */
                 .map(item -> item.getImporte())
-                // Reduce , primer argumento ponemos el valor inicial 0
-                // el segundo argumento es un call back
-                // recibe una variable que es el acumulador "sum" y el objeto del stream que es
-                // importe
+                /*
+                 * Reduce , primer argumento ponemos el valor inicial 0
+                 * el segundo argumento es un call back
+                 * recibe una variable que es el acumulador "sum" y el objeto del stream que es
+                 * importe.
+                 */
                 .reduce(0, (sum, importe) -> sum + importe);
     }
 

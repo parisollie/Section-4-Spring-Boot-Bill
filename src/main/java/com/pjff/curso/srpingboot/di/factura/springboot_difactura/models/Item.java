@@ -37,7 +37,7 @@ public class Item {
     }
 
     /*----------------------------------------------------------------------------- */
-    // Paso 21,vid 70
+    // Paso 25
     public int getImporte() {
         // devolvemos el precio del producto por la cantidad
         return quantity * product.getPrice();
