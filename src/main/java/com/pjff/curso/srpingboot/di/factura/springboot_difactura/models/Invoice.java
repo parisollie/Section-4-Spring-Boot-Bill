@@ -13,14 +13,19 @@ import jakarta.annotation.PreDestroy;
 
 //Le ponemos component porque será componente ,paso 9 Vid 67
 @Component
-// V-75, agregamos @RequestScope
+// V-75,paso 2.5 agregamos @RequestScope
 @RequestScope
-// V-75, ignoramos el json, omitimos 2 atributos del proxy: { "targetSource",
-// "advisors" }
-// @JsonIgnoreProperties({ "targetSource", "advisors" })
+/*
+ * Paso 2.6 ignoramos el json, omitimos 2 atributos del proxy: { "targetSource",
+ * "advisors" }
+ * 
+ * @JsonIgnoreProperties({ "targetSource", "advisors" })
+ */
 public class Invoice {
-    // Paso 3 , creamos las propiedades de factura client , description y lista.
-    // Con Autowired, inyectamos el cliente
+    /*
+     * Paso 3 , creamos las propiedades de factura client , description y lista.
+     * Con Autowired, inyectamos el cliente
+     */
     @Autowired
     private Client client;
 
@@ -30,7 +35,7 @@ public class Invoice {
 
     // Paso 19, vid 69, inyectamos con el Autowired
     @Autowired
-    // V-72, ponemos el @Qualifier("default")
+    // V-72,paso 2.2 ponemos el @Qualifier("default")
     @Qualifier("default")
     private List<Item> items;
 
@@ -41,10 +46,12 @@ public class Invoice {
         System.out.println(description);
     }
 
-    // @PostConstruct, se ejecuta despues de que se haya instanciado y depsues de
-    // que se haya inyectado
+    /*
+     * @PostConstruct, se ejecuta despues de que se haya instanciado y despues de
+     * que se haya inyectado
+     */
     @PostConstruct
-    // V-73,paso
+    // V-73,paso 2.3
     public void init() {
         System.out.println("Creando el componente de la factura");
         client.setName(client.getName().concat(" Nick"));
@@ -53,8 +60,9 @@ public class Invoice {
                 .concat(client.getLastname());
     }
 
-    // V-74,paso , se cierra una conexion o algo así para que no se quede
-    // abierta
+    /*
+     * V-74,paso 2.4, se cierra una conexion o algo así para que no se quede abierta
+     */
     @PreDestroy
     public void destroy() {
         System.out.println("Destruyendo el componente o bean invoice!");

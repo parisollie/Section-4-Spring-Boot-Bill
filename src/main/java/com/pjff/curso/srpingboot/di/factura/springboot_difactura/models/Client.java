@@ -7,8 +7,10 @@ import org.springframework.web.context.annotation.RequestScope;
 //V-67,Le ponemos component porque será componente 
 @Component
 @RequestScope
-// @JsonIgnoreProperties({"targetSource", "advisors"})
-// V-67, paso 1, creamos al cliente
+/*
+ * @JsonIgnoreProperties({"targetSource", "advisors"})
+ * V-67, paso 1, creamos al cliente
+ */
 public class Client {
     // Paso 2, creamos sus atributos name y lastname.
 

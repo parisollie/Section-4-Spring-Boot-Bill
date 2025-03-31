@@ -36,7 +36,7 @@ public class AppConfig {
         return Arrays.asList(new Item(p1, 2), new Item(p2, 4));
     }
 
-    // V-72, paso
+    // V-72, paso 2.0
     @Bean("default")
     List<Item> itemsInvoiceOffice() {
         Product p1 = new Product("Monitor Asus 24", 700);
